@@ -11,11 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.HashSet;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicLabelUI;
-import sun.swing.SwingUtilities2;
 
 /**
  *
@@ -23,114 +20,37 @@ import sun.swing.SwingUtilities2;
  */
 public class TF2SpyHitBox implements ActionListener, MouseListener {
 
-    public String classChosen = "";
-
-    // hashtable 
-    HashSet h = new HashSet();
-    // ArrayLists
-    ArrayList<ButtonTF2> classSelectionButtonArray = new ArrayList<ButtonTF2>();
-    ArrayList<ImageTF2> imageArray = new ArrayList<ImageTF2>();
-    ArrayList<JButton> classButtonArray = new ArrayList<JButton>();
-    ArrayList<JButton> viewButtonArray = new ArrayList<JButton>();
-    ArrayList<JButton> hitboxArray = new ArrayList<JButton>();
-
-    JFrame frame = new JFrame();
-
-    //ImageIcon scoutPic1 = new ImageIcon(new ImageIcon((getClass().getResource("/scout1.png"))).getImage().getScaledInstance(300, 500, Image.SCALE_DEFAULT));
-    //ImageIcon scoutPic2 = new ImageIcon(new ImageIcon((getClass().getResource("/scout2.png"))).getImage().getScaledInstance(300, 500, Image.SCALE_DEFAULT));
-    ImageIcon checkMark = new ImageIcon(new ImageIcon((getClass().getResource("/check-mark.png"))).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-    ImageIcon xMark = new ImageIcon(new ImageIcon((getClass().getResource("/x-mark.png"))).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
-
-    //ImageIcon scout_f = new ImageIcon((getClass().getResource("/scout_f.jpg")));
-    //  Creating ImageTF2 objects for each image and adding it to imageArray
-    public void addImages() {
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_f.jpg"))), "scout", "scout_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_s.jpg"))), "scout", "scout_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_b.jpg"))), "scout", "scout_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_f.jpg"))), "soldier", "soldier_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_s.jpg"))), "soldier", "soldier_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_b.jpg"))), "soldier", "soldier_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_f.jpg"))), "pyro", "pyro_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_s.jpg"))), "pyro", "pyro_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_b.jpg"))), "pyro", "pyro_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_f.jpg"))), "demo", "demo_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_s.jpg"))), "demo", "demo_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_b.jpg"))), "demo", "demo_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_f.jpg"))), "engineer", "engineer_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_s.jpg"))), "engineer", "engineer_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_b.jpg"))), "engineer", "engineer_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_f.jpg"))), "heavy", "heavy_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_s.jpg"))), "heavy", "heavy_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_b.jpg"))), "heavy", "heavy_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_f.jpg"))), "medic", "medic_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_s.jpg"))), "medic", "medic_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_b.jpg"))), "medic", "medic_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_f.jpg"))), "sniper", "sniper_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_s.jpg"))), "sniper", "sniper_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_b.jpg"))), "sniper", "sniper_b"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_f.jpg"))), "spy", "spy_f"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_s.jpg"))), "spy", "spy_s"));
-        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_b.jpg"))), "spy", "spy_b"));
+    public static void main(String[] args) {
+        TF2SpyHitBox program = new TF2SpyHitBox();
+        program.start();
     }
 
-    /*
-    ImageIcon scout_f = new ImageIcon((getClass().getResource("/scout_f.jpg")));
-    ImageIcon scout_s = new ImageIcon((getClass().getResource("/scout_s.jpg")));
-    ImageIcon scout_b = new ImageIcon((getClass().getResource("/scout_b.jpg")));
-    ImageIcon soldier_f = new ImageIcon((getClass().getResource("/soldier_f.jpg")));
-    ImageIcon soldier_s = new ImageIcon((getClass().getResource("/soldier_s.jpg")));
-    ImageIcon soldier_b = new ImageIcon((getClass().getResource("/soldier_b.jpg")));
-    ImageIcon pyro_f = new ImageIcon((getClass().getResource("/pyro_f.jpg")));
-    ImageIcon pyro_s = new ImageIcon((getClass().getResource("/pyro_s.jpg")));
-    ImageIcon pyro_b = new ImageIcon((getClass().getResource("/pyro_b.jpg")));
-    ImageIcon demo_f = new ImageIcon((getClass().getResource("/demo_f.jpg")));
-    ImageIcon demo_s = new ImageIcon((getClass().getResource("/demo_s.jpg")));
-    ImageIcon demo_b = new ImageIcon((getClass().getResource("/demo_b.jpg")));
-    ImageIcon heavy_f = new ImageIcon((getClass().getResource("/heavy_f.jpg")));
-    ImageIcon heavy_s = new ImageIcon((getClass().getResource("/heavy_s.jpg")));
-    ImageIcon heavy_b = new ImageIcon((getClass().getResource("/heavy_b.jpg")));
-    ImageIcon engineer_f = new ImageIcon((getClass().getResource("/engineer_f.jpg")));
-    ImageIcon engineer_s = new ImageIcon((getClass().getResource("/engineer_s.jpg")));
-    ImageIcon engineer_b = new ImageIcon((getClass().getResource("/engineer_b.jpg")));
-    ImageIcon medic_f = new ImageIcon((getClass().getResource("/medic_f.jpg")));
-    ImageIcon medic_s = new ImageIcon((getClass().getResource("/medic_s.jpg")));
-    ImageIcon medic_b = new ImageIcon((getClass().getResource("/medic_b.jpg")));
-    ImageIcon sniper_f = new ImageIcon((getClass().getResource("/sniper_f.jpg")));
-    ImageIcon sniper_s = new ImageIcon((getClass().getResource("/sniper_s.jpg")));
-    ImageIcon sniper_b = new ImageIcon((getClass().getResource("/sniper_b.jpg")));
-    ImageIcon spy_f = new ImageIcon((getClass().getResource("/spy_f.jpg")));
-    ImageIcon spy_s = new ImageIcon((getClass().getResource("/spy_s.jpg")));
-    ImageIcon spy_b = new ImageIcon((getClass().getResource("/spy_b.jpg")));
-     */
-    // FOR TESTING PURPOSES: SPY SHOWN IN PHOTOS
-    /*ImageIcon scout_f = new ImageIcon((getClass().getResource("/scout_f_spy.jpg")));
-    ImageIcon scout_s = new ImageIcon((getClass().getResource("/scout_s_spy.jpg")));
-    ImageIcon scout_b = new ImageIcon((getClass().getResource("/scout_b_spy.jpg")));
-    ImageIcon soldier_f = new ImageIcon((getClass().getResource("/soldier_f_spy.jpg")));
-    ImageIcon soldier_s = new ImageIcon((getClass().getResource("/soldier_s_spy.jpg")));
-    ImageIcon soldier_b = new ImageIcon((getClass().getResource("/soldier_b_spy.jpg")));
-    ImageIcon pyro_f = new ImageIcon((getClass().getResource("/pyro_f_spy.jpg")));
-    ImageIcon pyro_s = new ImageIcon((getClass().getResource("/pyro_s_spy.jpg")));
-    ImageIcon pyro_b = new ImageIcon((getClass().getResource("/pyro_b_spy.jpg")));
-    ImageIcon demo_f = new ImageIcon((getClass().getResource("/demo_f_spy.jpg")));
-    ImageIcon demo_s = new ImageIcon((getClass().getResource("/demo_s_spy.jpg")));
-    ImageIcon demo_b = new ImageIcon((getClass().getResource("/demo_b_spy.jpg")));
-    ImageIcon heavy_f = new ImageIcon((getClass().getResource("/heavy_f_spy.jpg")));
-    ImageIcon heavy_s = new ImageIcon((getClass().getResource("/heavy_s_spy.jpg")));
-    ImageIcon heavy_b = new ImageIcon((getClass().getResource("/heavy_b_spy.jpg")));
-    ImageIcon engineer_f = new ImageIcon((getClass().getResource("/engineer_f_spy.jpg")));
-    ImageIcon engineer_s = new ImageIcon((getClass().getResource("/engineer_s_spy.jpg")));
-    ImageIcon engineer_b = new ImageIcon((getClass().getResource("/engineer_b_spy.jpg")));
-    ImageIcon medic_f = new ImageIcon((getClass().getResource("/medic_f_spy.jpg")));
-    ImageIcon medic_s = new ImageIcon((getClass().getResource("/medic_s_spy.jpg")));
-    ImageIcon medic_b = new ImageIcon((getClass().getResource("/medic_b_spy.jpg")));
-    ImageIcon sniper_f = new ImageIcon((getClass().getResource("/sniper_f_spy.jpg")));
-    ImageIcon sniper_s = new ImageIcon((getClass().getResource("/sniper_s_spy.jpg")));
-    ImageIcon sniper_b = new ImageIcon((getClass().getResource("/sniper_b_spy.jpg")));
-    ImageIcon spy_f = new ImageIcon((getClass().getResource("/spy_f.jpg")));
-    ImageIcon spy_s = new ImageIcon((getClass().getResource("/spy_s.jpg")));
-    ImageIcon spy_b = new ImageIcon((getClass().getResource("/spy_b.jpg")));
-     */
+    // Global variable that holds the name of the chosen class at the time
+    public String classChosen = "";
+
+    // main frame
+    JFrame frame = new JFrame();
+
+    // Label that will display the images 
+    JLabel classLabel = new JLabel();
+
+    // Label that will show the userers their choice validity (if they found the hitbox or not)
+    JLabel answerLabel = new JLabel();
+
+    // Array that holds the class selection buttons
+    ArrayList<ButtonTF2> classButtonArray = new ArrayList<ButtonTF2>();
+    // Array that holds all the images
+    ArrayList<ImageTF2> imageArray = new ArrayList<ImageTF2>();
+    // Array that holds the 3 different view buttons (POV)
+    ArrayList<JButton> viewButtonArray = new ArrayList<JButton>();
+    // Array that holds the hitboxes buttons
+    ArrayList<JButton> hitboxArray = new ArrayList<JButton>();
+
+    // Green check mark image
+    ImageIcon checkMark = new ImageIcon(new ImageIcon((getClass().getResource("/check-mark.png"))).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+    // Red X image
+    ImageIcon xMark = new ImageIcon(new ImageIcon((getClass().getResource("/x-mark.png"))).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+
     // Panels 
     JPanel panel1 = new JPanel();
     JPanel panel2 = new JPanel();
@@ -182,89 +102,65 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
     JButton sniperButton = new JButton("sniper");
     JButton spyButton = new JButton("spy");
 
+    // Creating ButtonTF2 objects for each "class selection" button and adding it to an array
     public void addClassButtons() {
-        classSelectionButtonArray.add(new ButtonTF2(scoutButton, "scout"));
-        classSelectionButtonArray.add(new ButtonTF2(soldierButton, "soldier"));
-        classSelectionButtonArray.add(new ButtonTF2(pyroButton, "pyro"));
-        classSelectionButtonArray.add(new ButtonTF2(demoButton, "demo"));
-        classSelectionButtonArray.add(new ButtonTF2(heavyButton, "heavy"));
-        classSelectionButtonArray.add(new ButtonTF2(engineerButton, "engineer"));
-        classSelectionButtonArray.add(new ButtonTF2(medicButton, "medic"));
-        classSelectionButtonArray.add(new ButtonTF2(sniperButton, "sniper"));
-        classSelectionButtonArray.add(new ButtonTF2(spyButton, "spy"));
+        classButtonArray.add(new ButtonTF2(scoutButton, "scout"));
+        classButtonArray.add(new ButtonTF2(soldierButton, "soldier"));
+        classButtonArray.add(new ButtonTF2(pyroButton, "pyro"));
+        classButtonArray.add(new ButtonTF2(demoButton, "demo"));
+        classButtonArray.add(new ButtonTF2(heavyButton, "heavy"));
+        classButtonArray.add(new ButtonTF2(engineerButton, "engineer"));
+        classButtonArray.add(new ButtonTF2(medicButton, "medic"));
+        classButtonArray.add(new ButtonTF2(sniperButton, "sniper"));
+        classButtonArray.add(new ButtonTF2(spyButton, "spy"));
     }
 
-    // Label to be used by images for the classes
-    JLabel classLabel = new JLabel();
-
-    // Label for showing the user if the correct spot has been clicked on
-    JLabel answerLabel = new JLabel();
-
-    public static void main(String[] args) {
-        // for doing GUI
-//        testYourSelf t = new testYourSelf();
-//        t.setVisible(true);
-
-        // manual
-        TF2SpyHitBox program = new TF2SpyHitBox();
-
-        program.start();
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (e.getSource() == classLabel) {
-            answerLabel.setText("WRONG!");
-            answerLabel.setIcon(xMark);
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("Mouse released; # of clicks: " + e.getClickCount() + " " + e);
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        System.out.println("Mouse entered" + e);
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        System.out.println("Mouse exited" + e);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse clicked (# of clicks: "
-                + e.getClickCount() + ")" + e);
+    // Creating ImageTF2 objects for each image and adding it to an array
+    public void addImages() {
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_f.jpg"))), "scout", "scout_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_s.jpg"))), "scout", "scout_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/scout_b.jpg"))), "scout", "scout_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_f.jpg"))), "soldier", "soldier_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_s.jpg"))), "soldier", "soldier_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/soldier_b.jpg"))), "soldier", "soldier_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_f.jpg"))), "pyro", "pyro_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_s.jpg"))), "pyro", "pyro_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/pyro_b.jpg"))), "pyro", "pyro_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_f.jpg"))), "demo", "demo_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_s.jpg"))), "demo", "demo_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/demo_b.jpg"))), "demo", "demo_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_f.jpg"))), "engineer", "engineer_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_s.jpg"))), "engineer", "engineer_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/engineer_b.jpg"))), "engineer", "engineer_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_f.jpg"))), "heavy", "heavy_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_s.jpg"))), "heavy", "heavy_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/heavy_b.jpg"))), "heavy", "heavy_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_f.jpg"))), "medic", "medic_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_s.jpg"))), "medic", "medic_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/medic_b.jpg"))), "medic", "medic_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_f.jpg"))), "sniper", "sniper_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_s.jpg"))), "sniper", "sniper_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/sniper_b.jpg"))), "sniper", "sniper_b"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_f.jpg"))), "spy", "spy_f"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_s.jpg"))), "spy", "spy_s"));
+        imageArray.add(new ImageTF2(new ImageIcon((getClass().getResource("/spy_b.jpg"))), "spy", "spy_b"));
     }
 
     public void initButtons() {
 
-        addImages();
-        addClassButtons();
-
+        // Setting the toolbar icon image for the program
         Toolkit.getDefaultToolkit().getImage("/Leaderboard_class_spy.png");
-        classButtonArray.add(scoutButton);
-        classButtonArray.add(soldierButton);
-        classButtonArray.add(pyroButton);
-        classButtonArray.add(demoButton);
-        classButtonArray.add(heavyButton);
-        classButtonArray.add(engineerButton);
-        classButtonArray.add(medicButton);
-        classButtonArray.add(sniperButton);
-        classButtonArray.add(spyButton);
+
+        // spy "class button" icon
         spyButton.setIcon(new ImageIcon(new ImageIcon((getClass().getResource("/Leaderboard_class_spy.png"))).getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT)));
 
-        for (JButton button : classButtonArray) {
+        for (ButtonTF2 button : classButtonArray) {
             // adding a listner for each button so it's detected when clicked
-            button.addActionListener(this);
+            button.getButton().addActionListener(this);
             // diabling annoying outline around button text when clicked
-            button.setFocusable(false);
+            button.getButton().setFocusable(false);
             // adding buttons to panel1
-            panel1.add(button);
+            panel1.add(button.getButton());
         }
 
         viewButtonArray.add(frontViewButton);
@@ -272,18 +168,24 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
         viewButtonArray.add(rearViewButton);
 
         for (JButton button : viewButtonArray) {
+            // adding a listner for each button so it's detected when clicked
             button.addActionListener(this);
+            // diabling annoying outline around button text when clicked
             button.setFocusable(false);
+            // Making sure the button is disabled by default
             button.setEnabled(false);
+            // Adding the button to panel3
             panel3.add(button);
         }
 
-        // see
+        // The default is FlowLayout, but it's better to manually set it to avoid future problems
         classLabel.setLayout(new FlowLayout());
+
+        // Adding mouse listner to the classLabel (which will become an image later) to detect incorrect hitbox guesses
         classLabel.addMouseListener(this);
+    }
 
-        System.out.println(this.toString());
-
+    public void createHitboxes() {
         // Setting the location for each Head box
         scoutHead_f.setBounds(533, 190, 35, 35);
         scoutHead_s.setBounds(565, 190, 35, 35);
@@ -349,32 +251,24 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
         hitboxArray.add(spyHead_s);
         hitboxArray.add(spyHead_b);
 
-        //classLabel.setIcon(spy_b);
-        //frame.add(spyHead_b);
-        scoutHead_f.setOpaque(false);
-
         for (JButton button : hitboxArray) {
+            button.setOpaque(false);
             button.setEnabled(false);
             button.setVisible(false);
             button.setContentAreaFilled(false);
             button.setBorderPainted(false);
             button.setFocusable(false);
+            // fancy hitbox border
             button.setBorder(BorderFactory.createBevelBorder(1, Color.GREEN, Color.ORANGE, Color.RED, Color.BLUE));
-
-            // THIS WAS CAUSING THE BOXES TO NOT REGISTER? WHY? ITS JUST TEXT
-            //button.setText("");
+            /* THIS WAS CAUSING THE BOXES TO NOT REGISTER? WHY? ITS JUST TEXT  ---------> button.setText(""); */
             button.setFont(new Font("Times New Roman", Font.PLAIN, 0));
-            //button.setUI(new OpacityLabelUI());
-            frame.add(button);
             button.setForeground(Color.BLACK);
             button.addActionListener(this);
+            frame.add(button);
         }
-
-        // what is this command for
-        //frame.getContentPane().setBackground(Color.RED);
     }
 
-    // if "scout" is passed --> scout_hf     , scout_hs, scout_hb
+    // "className" is the class name, "viewType" is either | _f | _s | _b |
     public void showHitbox(String className, String viewType) {
         for (JButton button : hitboxArray) {
             if (button.getText().equals(className + viewType)) {
@@ -393,26 +287,32 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
     }
 
     public void start() {
-
-        frame.setResizable(false);
-        frame.setTitle("Cheetaz Super Cool Program");
-        frame.setIconImage(new ImageIcon((getClass().getResource("/Leaderboard_class_spy.png"))).getImage());
-        frame.setSize(1050, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
+        frame.setResizable(false);
+        frame.setSize(1050, 800);
+        frame.setTitle("Cheetaz Super Cool Program");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setIconImage(new ImageIcon((getClass().getResource("/Leaderboard_class_spy.png"))).getImage());
+
+        // Creating objects images and adding them to an array
+        addImages();
+        // Creating objects of "class buttons" and adding them to an array
+        addClassButtons();
+        // Creating buttons for hitboxes and adding them to an array
+        createHitboxes();
 
         // Class selection panel
         panel1.setBounds(20, 100, 200, 500);
         panel1.setBackground(new Color(170, 170, 170));
         panel1.setLayout(new GridLayout(9, 1, 5, 5));
         initButtons();
-        /*panel1.setLayout(new FlowLayout(4,4,4));*/
 
         // Picture panel
         panel2.setBounds(260, 100, 700, 500);
         panel2.setBackground(new Color(150, 150, 150));
+        panel2.add(classLabel);
+        classLabel.setText("Choose a class to begin");
 
-        //panel2.adda
         // POV Buttons panel
         panel3.setBounds(260, 600, 700, 50);
         panel3.setBackground(new Color(150, 150, 150));
@@ -421,11 +321,8 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
         panel4.setBounds(260, 650, 700, 100);
         panel4.setBackground(new Color(150, 150, 150));
         panel4.add(answerLabel);
-        //picLabel.setText("");
-        //answerLabel.setText("Answer will be shown here");
 
-        panel2.add(classLabel);
-        classLabel.setText("Choose a class to begin");
+        // Adding all the panels to the JFrame
         frame.add(panel1);
         frame.add(panel2);
         frame.add(panel3);
@@ -436,12 +333,14 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
         frame.setVisible(true);
         //panel.setVisible(true);
     }
-
+    
+    
+    // If any button gets clicked
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // add a for each loop here with the correct calls
-        for (ButtonTF2 b : classSelectionButtonArray) {
+        // check if the button clicked was a class selection button (panel1 buttons)
+        for (ButtonTF2 b : classButtonArray) {
             if (e.getSource() == b.getButton()) {
                 // Enabling the three differnet view buttons
                 for (JButton button : viewButtonArray) {
@@ -464,124 +363,67 @@ public class TF2SpyHitBox implements ActionListener, MouseListener {
                 }
             }
         }
-        if (e.getSource() == frontViewButton) {
+        /* Check if button clicked was one of the panel3 POV buttons */
+        //if "front" button was clicked
+        if (e.getSource() == frontViewButton) { 
             answerLabel.setIcon(null);
             classLabel.setIcon(new ImageIcon((getClass().getResource("/" + classChosen + "_f.jpg"))));
             showHitbox(classChosen, "_f");
             answerLabel.setText("");
-        } else if (e.getSource() == sideViewButton) {
+        } 
+        // if "side" button was clicked
+        else if (e.getSource() == sideViewButton) { 
             answerLabel.setIcon(null);
             classLabel.setIcon(new ImageIcon((getClass().getResource("/" + classChosen + "_s.jpg"))));
             showHitbox(classChosen, "_s");
             answerLabel.setText("");
-        } else if (e.getSource() == rearViewButton) {
+        }
+        // if "back" button was clicked
+        else if (e.getSource() == rearViewButton) {  
             answerLabel.setIcon(null);
             showHitbox(classChosen, "_b");
             answerLabel.setText("");
             classLabel.setIcon(new ImageIcon((getClass().getResource("/" + classChosen + "_b.jpg"))));
         } else {
+            // check if the button clicked was a hitbox button 
             for (JButton button : hitboxArray) {
                 if (e.getSource() == button) {
+                    // show border of the button
                     button.setBorderPainted(true);
-                    System.out.println("CORRECT");
+                    // set answerLabel text and icon 
                     answerLabel.setText("CORRECT!");
                     answerLabel.setIcon(checkMark);
                 }
             }
         }
+    }
+    
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getSource() == classLabel) {
+            answerLabel.setText("WRONG!");
+            answerLabel.setIcon(xMark);
+        }
+    }
 
-        /*
-        if (e.getSource() == scoutButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("scout", "_f");
-            classChosen = "scout";
-            classLabel.setIcon(scout_f);
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == soldierButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("soldier", "_f");
-            classChosen = "soldier";
-            classLabel.setIcon(soldier_f);
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == pyroButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("pyro", "_f");
-            classLabel.setIcon(pyro_f);
-            classChosen = "pyro";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == demoButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("demo", "_f");
-            classLabel.setIcon(demo_f);
-            classChosen = "demo";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == heavyButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("heavy", "_f");
-            classLabel.setIcon(heavy_f);
-            classChosen = "heavy";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == engineerButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("engineer", "_f");
-            classLabel.setIcon(engineer_f);
-            classChosen = "engineer";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == medicButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("medic", "_f");
-            classLabel.setIcon(medic_f);
-            classChosen = "medic";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == sniperButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("sniper", "_f");
-            classLabel.setIcon(sniper_f);
-            classChosen = "sniper";
-            answerLabel.setText("");
-            classLabel.setText("");
-        } else if (e.getSource() == spyButton) {
-            for (JButton button : viewButtonArray) {
-                button.setEnabled(true);
-            }
-            answerLabel.setIcon(null);
-            showHitbox("spy", "_f");
-            classLabel.setIcon(spy_f);
-            classChosen = "spy";
-            answerLabel.setText("");
-            classLabel.setText("");
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("Mouse released; # of clicks: " + e.getClickCount() + " " + e);
+    }
 
-        } else */
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        System.out.println("Mouse entered" + e);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        System.out.println("Mouse exited" + e);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Mouse clicked (# of clicks: "
+                + e.getClickCount() + ")" + e);
     }
 }
